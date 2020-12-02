@@ -8,11 +8,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_flags_question.*
+import kotlinx.android.synthetic.main.activity_logos_question.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
+class LogosQuestionActivity : AppCompatActivity(), View.OnClickListener {
     private var mCurrentPosition: Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
 
@@ -28,13 +28,13 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_flags_question)
+        setContentView(R.layout.activity_logos_question)
 
 
-        mUserName = intent.getStringExtra(Flags.USER_NAME)
+        mUserName = intent.getStringExtra(Logos.USER_NAME)
 
 
-        mQuestionsList = Flags.getQuestions()
+        mQuestionsList = Logos.getQuestions()
 
         setQuestion()
 
@@ -85,10 +85,10 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
 
                             val intent =
-                                Intent(this@FlagsQuestionActivity, ResultActivity::class.java)
-                            intent.putExtra(Flags.USER_NAME, mUserName)
-                            intent.putExtra(Flags.CORRECT_ANSWERS, mCorrectAnswers)
-                            intent.putExtra(Flags.TOTAL_QUESTIONS, mQuestionsList!!.size)
+                                    Intent(this@LogosQuestionActivity, ResultActivity::class.java)
+                            intent.putExtra(Logos.USER_NAME, mUserName)
+                            intent.putExtra(Logos.CORRECT_ANSWERS, mCorrectAnswers)
+                            intent.putExtra(Logos.TOTAL_QUESTIONS, mQuestionsList!!.size)
                             startActivity(intent)
                             finish()
 
@@ -152,12 +152,12 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
         mSelectedOptionPosition = selectedOptionNum
 
         tv.setTextColor(
-            Color.parseColor("#363A43")
+                Color.parseColor("#363A43")
         )
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background = ContextCompat.getDrawable(
-            this@FlagsQuestionActivity,
-            R.drawable.selected_option_border_bg
+                this@LogosQuestionActivity,
+                R.drawable.selected_option_border_bg
         )
     }
 
@@ -174,8 +174,8 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
             option.setTextColor(Color.parseColor("#7A8089"))
             option.typeface = Typeface.DEFAULT
             option.background = ContextCompat.getDrawable(
-                this@FlagsQuestionActivity,
-                R.drawable.default_option_border_bg
+                    this@LogosQuestionActivity,
+                    R.drawable.default_option_border_bg
             )
         }
     }
@@ -187,26 +187,26 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
             1 -> {
                 tv_option_one.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
-                    drawableView
+                        this@LogosQuestionActivity,
+                        drawableView
                 )
             }
             2 -> {
                 tv_option_two.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
-                    drawableView
+                        this@LogosQuestionActivity,
+                        drawableView
                 )
             }
             3 -> {
                 tv_option_three.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
-                    drawableView
+                        this@LogosQuestionActivity,
+                        drawableView
                 )
             }
             4 -> {
                 tv_option_four.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
-                    drawableView
+                        this@LogosQuestionActivity,
+                        drawableView
                 )
             }
         }

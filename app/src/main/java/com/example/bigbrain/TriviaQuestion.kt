@@ -8,13 +8,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_flags_question.*
+import com.example.bigbrain.Trivia.getQuestions
+import kotlinx.android.synthetic.main.activity_trivia_question.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
+class TriviaQuestion : AppCompatActivity(), View.OnClickListener {
     private var mCurrentPosition: Int = 1
-    private var mQuestionsList: ArrayList<Question>? = null
+    private var mQuestionsList: ArrayList<Question1>? = null
 
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswers: Int = 0
@@ -28,13 +29,13 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_flags_question)
+        setContentView(R.layout.activity_trivia_question)
 
 
-        mUserName = intent.getStringExtra(Flags.USER_NAME)
+        mUserName = intent.getStringExtra(Trivia.USER_NAME)
 
 
-        mQuestionsList = Flags.getQuestions()
+        mQuestionsList = getQuestions()
 
         setQuestion()
 
@@ -85,10 +86,10 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
 
                             val intent =
-                                Intent(this@FlagsQuestionActivity, ResultActivity::class.java)
-                            intent.putExtra(Flags.USER_NAME, mUserName)
-                            intent.putExtra(Flags.CORRECT_ANSWERS, mCorrectAnswers)
-                            intent.putExtra(Flags.TOTAL_QUESTIONS, mQuestionsList!!.size)
+                                Intent(this@TriviaQuestion, ResultActivity::class.java)
+                            intent.putExtra(Trivia.USER_NAME, mUserName)
+                            intent.putExtra(Trivia.CORRECT_ANSWERS, mCorrectAnswers)
+                            intent.putExtra(Trivia.TOTAL_QUESTIONS, mQuestionsList!!.size)
                             startActivity(intent)
                             finish()
 
@@ -137,7 +138,6 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
         tv_progress.text = "$mCurrentPosition" + "/" + progressBar.getMax()
 
         tv_question.text = question.question
-        iv_image.setImageResource(question.image)
         tv_option_one.text = question.optionOne
         tv_option_two.text = question.optionTwo
         tv_option_three.text = question.optionThree
@@ -156,7 +156,7 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
         )
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background = ContextCompat.getDrawable(
-            this@FlagsQuestionActivity,
+            this@TriviaQuestion,
             R.drawable.selected_option_border_bg
         )
     }
@@ -174,7 +174,7 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
             option.setTextColor(Color.parseColor("#7A8089"))
             option.typeface = Typeface.DEFAULT
             option.background = ContextCompat.getDrawable(
-                this@FlagsQuestionActivity,
+                this@TriviaQuestion,
                 R.drawable.default_option_border_bg
             )
         }
@@ -187,25 +187,25 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
             1 -> {
                 tv_option_one.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
+                    this@TriviaQuestion,
                     drawableView
                 )
             }
             2 -> {
                 tv_option_two.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
+                    this@TriviaQuestion,
                     drawableView
                 )
             }
             3 -> {
                 tv_option_three.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
+                    this@TriviaQuestion,
                     drawableView
                 )
             }
             4 -> {
                 tv_option_four.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
+                    this@TriviaQuestion,
                     drawableView
                 )
             }
