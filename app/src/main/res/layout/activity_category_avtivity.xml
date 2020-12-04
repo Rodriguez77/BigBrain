@@ -11,7 +11,7 @@
 
     <Button
         android:id="@+id/btn_flags"
-        android:layout_width="205dp"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Flags Quiz"
@@ -56,9 +56,12 @@
 
     <Button
         android:id="@+id/btn_history"
-        android:layout_width="206dp"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:text="History" />
+        android:layout_marginTop="16dp"
+        android:text="History Quiz"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
 
 </LinearLayout>

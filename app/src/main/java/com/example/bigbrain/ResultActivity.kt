@@ -8,9 +8,9 @@ import android.widget.ListView
 import com.example.bigbrain.handlers.scoresHandler
 import kotlinx.android.synthetic.main.activity_result.*
 import com.example.bigbrain.scores
-import com.google.firebase.database.DataSnapshot
+/*import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ValueEventListener*/
 
 class ResultActivity : AppCompatActivity() {
     var mUserName: String? = null
@@ -47,7 +47,7 @@ class ResultActivity : AppCompatActivity() {
             startActivity(Intent(this@ResultActivity, MainActivity::class.java))
         }
     }
-        override fun onStart() {
+       /* override fun onStart() {
             super.onStart()
 
            scoresHandler.scoresRef.orderByChild("username").addValueEventListener(object:
@@ -67,7 +67,7 @@ class ResultActivity : AppCompatActivity() {
                 }
 
             })
-        }
+        }*/
 
 
 
