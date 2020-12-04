@@ -20,6 +20,7 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswers: Int = 0
+
     private var mUserName: String? = null
 
     private var COUNTDOWN_IN_MILLIS: Long = 20000
@@ -31,12 +32,10 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flags_question)
-
-        textViewCountDown  = findViewById(R.id.countdownText)
-
         mUserName = intent.getStringExtra(Flags.USER_NAME)
         mQuestionsList = Flags.getQuestions()
 
+        textViewCountDown  = findViewById(R.id.countdownText)
         timeLeftInMillis = COUNTDOWN_IN_MILLIS
         startCountDown() // start timer
 
