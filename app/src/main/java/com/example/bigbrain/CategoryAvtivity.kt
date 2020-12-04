@@ -26,14 +26,14 @@ class CategoryAvtivity : AppCompatActivity() {
 
         btn_logos.setOnClickListener{
             val intent = Intent(this, LogosQuestionActivity::class.java)
-            intent.putExtra(Flags.USER_NAME, mUserName)
+            intent.putExtra(Logos.USER_NAME, mUserName)
             startActivity(intent)
             finish()
         }
 
         btn_trivia.setOnClickListener{
             val intent = Intent(this, TriviaQuestion::class.java)
-            intent.putExtra(Flags.USER_NAME, mUserName)
+            intent.putExtra(Trivia.USER_NAME, mUserName)
             startActivity(intent)
             finish()
         }
@@ -44,6 +44,7 @@ class CategoryAvtivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
         btn_mathqs.setOnClickListener{
             val intent = Intent(this, MathQuestionActivity::class.java)
             intent.putExtra(Mathqs.USER_NAME, mUserName)

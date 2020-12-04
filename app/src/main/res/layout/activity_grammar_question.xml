@@ -23,6 +23,14 @@
             android:textSize="22sp"
             tools:text="" />
 
+        <TextView
+            android:id="@+id/countdownText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="00:30" />
 
         <LinearLayout
             android:id="@+id/ll_progress_details"

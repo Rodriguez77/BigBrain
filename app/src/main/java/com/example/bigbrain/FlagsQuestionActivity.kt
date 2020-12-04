@@ -22,22 +22,25 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
     private var mCorrectAnswers: Int = 0
     private var mUserName: String? = null
 
-    private var COUNTDOWN_IN_MILLIS: Long = 30000
+    private var COUNTDOWN_IN_MILLIS: Long = 20000
     private var textViewCountDown: TextView? = null
-
     private var countDownTimer: CountDownTimer? = null
     private var timeLeftInMillis: Long = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        textViewCountDown  = findViewById(R.id.countdownText)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flags_question)
+
+        textViewCountDown  = findViewById(R.id.countdownText)
+
         mUserName = intent.getStringExtra(Flags.USER_NAME)
         mQuestionsList = Flags.getQuestions()
 
-        setQuestion()
+        timeLeftInMillis = COUNTDOWN_IN_MILLIS
+        startCountDown() // start timer
+
+        setQuestion() // start of the question
 
         tv_option_one.setOnClickListener(this)
         tv_option_two.setOnClickListener(this)
@@ -46,67 +49,47 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
         btn_submit.setOnClickListener(this)
     }
 
-    override fun onClick(v: View?) {
-
+    override fun onClick(v: View?) { // four choices
         when (v?.id) {
-
             R.id.tv_option_one -> {
-
                 selectedOptionView(tv_option_one, 1)
             }
-
             R.id.tv_option_two -> {
-
                 selectedOptionView(tv_option_two, 2)
             }
-
             R.id.tv_option_three -> {
-
                 selectedOptionView(tv_option_three, 3)
             }
-
             R.id.tv_option_four -> {
-
                 selectedOptionView(tv_option_four, 4)
             }
-
             R.id.btn_submit -> {
+                countDownTimer?.cancel() // cancel timer when user submits
 
                 if (mSelectedOptionPosition == 0) {
-
                     mCurrentPosition++
-
-                    when {
-
-                        mCurrentPosition <= mQuestionsList!!.size -> {
-
+                    when { mCurrentPosition <= mQuestionsList!!.size -> {
+                            timeLeftInMillis = COUNTDOWN_IN_MILLIS
+                            startCountDown()
                             setQuestion()
                         }
                         else -> {
-
-
-                            val intent =
-                                    Intent(this@FlagsQuestionActivity, ResultActivity::class.java)
+                            val intent = Intent(this@FlagsQuestionActivity, ResultActivity::class.java)
                             intent.putExtra(Flags.USER_NAME, mUserName)
                             intent.putExtra(Flags.CORRECT_ANSWERS, mCorrectAnswers)
                             intent.putExtra(Flags.TOTAL_QUESTIONS, mQuestionsList!!.size)
                             startActivity(intent)
                             finish()
-
                         }
                     }
                 } else {
                     val question = mQuestionsList?.get(mCurrentPosition - 1)
-
                     // This is to check if the answer is wrong
                     if (question!!.correctAnswer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
                     } else {
                         mCorrectAnswers++
-                        countDownTimer?.cancel()
                     }
-
-
                     answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
 
                     if (mCurrentPosition == mQuestionsList!!.size) {
@@ -114,19 +97,15 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
                     } else {
                         btn_submit.text = "GO TO NEXT QUESTION"
                     }
-
                     mSelectedOptionPosition = 0
                 }
             }
         }
     }
-
-
     private fun setQuestion() {
 
-
-        val question = mQuestionsList!!.get(mCurrentPosition - 1) // Getting the question from the list with the help of current position.
-
+        // Getting the question from the list with the help of current position.
+        val question = mQuestionsList!!.get(mCurrentPosition - 1)
         defaultOptionsView()
 
         if (mCurrentPosition == mQuestionsList!!.size) {
@@ -135,6 +114,7 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
             btn_submit.text = "SUBMIT"
         }
 
+        // progress bar
         progressBar.progress = mCurrentPosition
         tv_progress.text = "$mCurrentPosition" + "/" + progressBar.getMax()
 
@@ -144,9 +124,6 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
         tv_option_two.text = question.optionTwo
         tv_option_three.text = question.optionThree
         tv_option_four.text = question.optionFour
-
-        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
-        startCountDown()
     }
 
     private fun startCountDown()
@@ -155,15 +132,11 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
            override fun onTick(millisUntilFinished: Long) {
               timeLeftInMillis = millisUntilFinished
                updateCountDownText()
-
            }
-
            override fun onFinish() {
                 timeLeftInMillis = 0;
                 updateCountDownText()
-
            }
-
        }.start()
     }
 
@@ -171,18 +144,14 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
     {
         val minutes = (timeLeftInMillis / 1000).toInt() / 60
         val seconds = (timeLeftInMillis / 1000).toInt() % 60
-
         val timeFormatted: String = java.lang.String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
         textViewCountDown?.setText(timeFormatted)
     }
 
-
     private fun selectedOptionView(tv: TextView, selectedOptionNum: Int) {
 
         defaultOptionsView()
-
         mSelectedOptionPosition = selectedOptionNum
-
         tv.setTextColor(
                 Color.parseColor("#363A43")
         )
@@ -193,9 +162,7 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
         )
     }
 
-
     private fun defaultOptionsView() {
-
         val options = ArrayList<TextView>()
         options.add(0, tv_option_one)
         options.add(1, tv_option_two)
@@ -211,18 +178,12 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
             )
         }
     }
-
-
     private fun answerView(answer: Int, drawableView: Int) {
-
         when (answer) {
-
             1 -> {
                 tv_option_one.background = ContextCompat.getDrawable(
                         this@FlagsQuestionActivity,
                         drawableView
-
-
                 )
             }
             2 -> {
