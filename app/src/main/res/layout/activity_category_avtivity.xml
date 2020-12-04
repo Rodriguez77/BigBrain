@@ -11,12 +11,18 @@
 
     <Button
         android:id="@+id/btn_flags"
-        android:layout_width="match_parent"
+        android:layout_width="205dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Flags"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_history"
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:text="History" />
 
 
 </LinearLayout>

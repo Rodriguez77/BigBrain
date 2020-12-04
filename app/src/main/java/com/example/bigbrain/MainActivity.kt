@@ -13,9 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
-
         btn_start.setOnClickListener {
 
             if (et_name.text.toString().isEmpty()){

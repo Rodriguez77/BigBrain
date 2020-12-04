@@ -12,8 +12,9 @@ class CategoryAvtivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_avtivity)
         mUserName = intent.getStringExtra(Flags.USER_NAME)
+        mUserName = intent.getStringExtra(History.USER_NAME)
 
-        btn_flags.setOnClickListener{
+        btn_flags.setOnClickListener {
             val intent = Intent(this, FlagsQuestionActivity::class.java)
             // TODO (STEP 2: Pass the name through intent using the constant variable which we have created.)
             // START
@@ -22,5 +23,14 @@ class CategoryAvtivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+            btn_history.setOnClickListener {
+                val intent = Intent(this, HistoryQuestionActivity::class.java)
+                // TODO (STEP 2: Pass the name through intent using the constant variable which we have created.)
+                // START
+                intent.putExtra(History.USER_NAME, mUserName)
+                // END
+                startActivity(intent)
+                finish()
+            }
+        }
     }
-}
