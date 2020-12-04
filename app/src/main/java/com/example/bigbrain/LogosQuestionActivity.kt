@@ -9,18 +9,17 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_flags_question.*
+import kotlinx.android.synthetic.main.activity_logos_question.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
+class LogosQuestionActivity : AppCompatActivity(), View.OnClickListener {
     private var mCurrentPosition: Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
 
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswers: Int = 0
-
     private var mUserName: String? = null
 
     private var COUNTDOWN_IN_MILLIS: Long = 20000
@@ -32,10 +31,12 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flags_question)
-        mUserName = intent.getStringExtra(Flags.USER_NAME)
-        mQuestionsList = Flags.getQuestions()
 
         textViewCountDown  = findViewById(R.id.countdownText)
+
+        mUserName = intent.getStringExtra(Logos.USER_NAME)
+        mQuestionsList = Logos.getQuestions()
+
         timeLeftInMillis = COUNTDOWN_IN_MILLIS
         startCountDown() // start timer
 
@@ -68,15 +69,15 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
                 if (mSelectedOptionPosition == 0) {
                     mCurrentPosition++
                     when { mCurrentPosition <= mQuestionsList!!.size -> {
-                            timeLeftInMillis = COUNTDOWN_IN_MILLIS
-                            startCountDown()
-                            setQuestion()
-                        }
+                        timeLeftInMillis = COUNTDOWN_IN_MILLIS
+                        startCountDown()
+                        setQuestion()
+                    }
                         else -> {
-                            val intent = Intent(this@FlagsQuestionActivity, ResultActivity::class.java)
-                            intent.putExtra(Flags.USER_NAME, mUserName)
-                            intent.putExtra(Flags.CORRECT_ANSWERS, mCorrectAnswers)
-                            intent.putExtra(Flags.TOTAL_QUESTIONS, mQuestionsList!!.size)
+                            val intent = Intent(this@LogosQuestionActivity, ResultActivity::class.java)
+                            intent.putExtra(Logos.USER_NAME, mUserName)
+                            intent.putExtra(Logos.CORRECT_ANSWERS, mCorrectAnswers)
+                            intent.putExtra(Logos.TOTAL_QUESTIONS, mQuestionsList!!.size)
                             startActivity(intent)
                             finish()
                         }
@@ -127,16 +128,16 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun startCountDown()
     {
-       countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
-           override fun onTick(millisUntilFinished: Long) {
-              timeLeftInMillis = millisUntilFinished
-               updateCountDownText()
-           }
-           override fun onFinish() {
+        countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeftInMillis = millisUntilFinished
+                updateCountDownText()
+            }
+            override fun onFinish() {
                 timeLeftInMillis = 0;
                 updateCountDownText()
-           }
-       }.start()
+            }
+        }.start()
     }
 
     private fun updateCountDownText()
@@ -156,7 +157,7 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
         )
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background = ContextCompat.getDrawable(
-                this@FlagsQuestionActivity,
+                this@LogosQuestionActivity,
                 R.drawable.selected_option_border_bg
         )
     }
@@ -172,7 +173,7 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
             option.setTextColor(Color.parseColor("#7A8089"))
             option.typeface = Typeface.DEFAULT
             option.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
+                    this@LogosQuestionActivity,
                     R.drawable.default_option_border_bg
             )
         }
@@ -181,25 +182,25 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
         when (answer) {
             1 -> {
                 tv_option_one.background = ContextCompat.getDrawable(
-                        this@FlagsQuestionActivity,
+                        this@LogosQuestionActivity,
                         drawableView
                 )
             }
             2 -> {
                 tv_option_two.background = ContextCompat.getDrawable(
-                        this@FlagsQuestionActivity,
+                        this@LogosQuestionActivity,
                         drawableView
                 )
             }
             3 -> {
                 tv_option_three.background = ContextCompat.getDrawable(
-                        this@FlagsQuestionActivity,
+                        this@LogosQuestionActivity,
                         drawableView
                 )
             }
             4 -> {
                 tv_option_four.background = ContextCompat.getDrawable(
-                        this@FlagsQuestionActivity,
+                        this@LogosQuestionActivity,
                         drawableView
                 )
             }

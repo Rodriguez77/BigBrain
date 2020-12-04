@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".FlagsQuestionActivity">
+    tools:context=".GrammarQuestionActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:gravity="center"
             android:textColor="#363A43"
             android:textSize="22sp"
-            tools:text="What country does this flag belong to?" />
+            tools:text="" />
 
         <TextView
             android:id="@+id/countdownText"
@@ -31,14 +31,6 @@
             android:gravity="center"
             android:textSize="18sp"
             android:text="00:30" />
-
-        <ImageView
-            android:id="@+id/iv_image"
-            android:layout_width="355dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="image"
-            tools:src="@drawable/ic_flag_bulgaria" />
 
         <LinearLayout
             android:id="@+id/ll_progress_details"
@@ -136,6 +128,5 @@
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
-
     </LinearLayout>
 </ScrollView>

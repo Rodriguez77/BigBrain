@@ -22,6 +22,11 @@ class MainActivity : AppCompatActivity() {
             } else {
 
                 val intent = Intent(this@MainActivity,CategoryAvtivity::class.java)
+                intent.putExtra(Flags.USER_NAME, et_name.text.toString())
+                intent.putExtra(Logos.USER_NAME, et_name.text.toString())
+                intent.putExtra(Trivia.USER_NAME, et_name.text.toString())
+                intent.putExtra(Grammar.USER_NAME, et_name.text.toString())
+                intent.putExtra(Mathqs.USER_NAME, et_name.text.toString())
                 startActivity(intent)
                 finish()
             }
