@@ -3,13 +3,15 @@ package com.example.bigbrain
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_flags_question.*
-import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
@@ -18,22 +20,21 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswers: Int = 0
-
-
     private var mUserName: String? = null
 
+    private var COUNTDOWN_IN_MILLIS: Long = 30000
+    private var textViewCountDown: TextView? = null
+
+    private var countDownTimer: CountDownTimer? = null
+    private var timeLeftInMillis: Long = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        textViewCountDown  = findViewById(R.id.countdownText)
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_flags_question)
-
-
         mUserName = intent.getStringExtra(Flags.USER_NAME)
-
-
         mQuestionsList = Flags.getQuestions()
 
         setQuestion()
@@ -85,7 +86,7 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
 
                             val intent =
-                                Intent(this@FlagsQuestionActivity, ResultActivity::class.java)
+                                    Intent(this@FlagsQuestionActivity, ResultActivity::class.java)
                             intent.putExtra(Flags.USER_NAME, mUserName)
                             intent.putExtra(Flags.CORRECT_ANSWERS, mCorrectAnswers)
                             intent.putExtra(Flags.TOTAL_QUESTIONS, mQuestionsList!!.size)
@@ -100,9 +101,9 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
                     // This is to check if the answer is wrong
                     if (question!!.correctAnswer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
-                    }
-                    else {
+                    } else {
                         mCorrectAnswers++
+                        countDownTimer?.cancel()
                     }
 
 
@@ -123,6 +124,7 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setQuestion() {
 
+
         val question = mQuestionsList!!.get(mCurrentPosition - 1) // Getting the question from the list with the help of current position.
 
         defaultOptionsView()
@@ -142,6 +144,36 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
         tv_option_two.text = question.optionTwo
         tv_option_three.text = question.optionThree
         tv_option_four.text = question.optionFour
+
+        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        startCountDown()
+    }
+
+    private fun startCountDown()
+    {
+       countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
+           override fun onTick(millisUntilFinished: Long) {
+              timeLeftInMillis = millisUntilFinished
+               updateCountDownText()
+
+           }
+
+           override fun onFinish() {
+                timeLeftInMillis = 0;
+                updateCountDownText()
+
+           }
+
+       }.start()
+    }
+
+    private fun updateCountDownText()
+    {
+        val minutes = (timeLeftInMillis / 1000).toInt() / 60
+        val seconds = (timeLeftInMillis / 1000).toInt() % 60
+
+        val timeFormatted: String = java.lang.String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
+        textViewCountDown?.setText(timeFormatted)
     }
 
 
@@ -152,12 +184,12 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
         mSelectedOptionPosition = selectedOptionNum
 
         tv.setTextColor(
-            Color.parseColor("#363A43")
+                Color.parseColor("#363A43")
         )
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background = ContextCompat.getDrawable(
-            this@FlagsQuestionActivity,
-            R.drawable.selected_option_border_bg
+                this@FlagsQuestionActivity,
+                R.drawable.selected_option_border_bg
         )
     }
 
@@ -174,8 +206,8 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
             option.setTextColor(Color.parseColor("#7A8089"))
             option.typeface = Typeface.DEFAULT
             option.background = ContextCompat.getDrawable(
-                this@FlagsQuestionActivity,
-                R.drawable.default_option_border_bg
+                    this@FlagsQuestionActivity,
+                    R.drawable.default_option_border_bg
             )
         }
     }
@@ -187,28 +219,35 @@ class FlagsQuestionActivity : AppCompatActivity(), View.OnClickListener {
 
             1 -> {
                 tv_option_one.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
-                    drawableView
+                        this@FlagsQuestionActivity,
+                        drawableView
+
+
                 )
             }
             2 -> {
                 tv_option_two.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
-                    drawableView
+                        this@FlagsQuestionActivity,
+                        drawableView
                 )
             }
             3 -> {
                 tv_option_three.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
-                    drawableView
+                        this@FlagsQuestionActivity,
+                        drawableView
                 )
             }
             4 -> {
                 tv_option_four.background = ContextCompat.getDrawable(
-                    this@FlagsQuestionActivity,
-                    drawableView
+                        this@FlagsQuestionActivity,
+                        drawableView
                 )
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        countDownTimer?.cancel()
     }
 }

@@ -14,6 +14,8 @@ class CategoryAvtivity : AppCompatActivity() {
         mUserName = intent.getStringExtra(Flags.USER_NAME)
         mUserName = intent.getStringExtra(Logos.USER_NAME)
         mUserName = intent.getStringExtra(Trivia.USER_NAME)
+        mUserName = intent.getStringExtra(Grammar.USER_NAME)
+        mUserName = intent.getStringExtra(Mathqs.USER_NAME)
 
         btn_flags.setOnClickListener{
             val intent = Intent(this, FlagsQuestionActivity::class.java)
@@ -35,5 +37,19 @@ class CategoryAvtivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        btn_grammar.setOnClickListener{
+            val intent = Intent(this, GrammarQuestionActivity::class.java)
+            intent.putExtra(Grammar.USER_NAME, mUserName)
+            startActivity(intent)
+            finish()
+        }
+        btn_mathqs.setOnClickListener{
+            val intent = Intent(this, MathQuestionActivity::class.java)
+            intent.putExtra(Mathqs.USER_NAME, mUserName)
+            startActivity(intent)
+            finish()
+        }
+
     }
 }

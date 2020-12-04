@@ -8,12 +8,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.example.bigbrain.Grammar.getQuestions
-import kotlinx.android.synthetic.main.activity_trivia_question.*
+import com.example.bigbrain.Mathqs.getQuestions
+import kotlinx.android.synthetic.main.activity_math_question.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class TriviaQuestion : AppCompatActivity(), View.OnClickListener {
+class MathQuestionActivity : AppCompatActivity(), View.OnClickListener {
     private var mCurrentPosition: Int = 1
     private var mQuestionsList: ArrayList<Question1>? = null
 
@@ -29,10 +29,10 @@ class TriviaQuestion : AppCompatActivity(), View.OnClickListener {
 
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_trivia_question)
+        setContentView(R.layout.activity_grammar_question)
 
 
-        mUserName = intent.getStringExtra(Trivia.USER_NAME)
+        mUserName = intent.getStringExtra(Mathqs.USER_NAME)
 
 
         mQuestionsList = getQuestions()
@@ -86,10 +86,10 @@ class TriviaQuestion : AppCompatActivity(), View.OnClickListener {
 
 
                             val intent =
-                                Intent(this@TriviaQuestion, ResultActivity::class.java)
-                            intent.putExtra(Trivia.USER_NAME, mUserName)
-                            intent.putExtra(Trivia.CORRECT_ANSWERS, mCorrectAnswers)
-                            intent.putExtra(Trivia.TOTAL_QUESTIONS, mQuestionsList!!.size)
+                                Intent(this@MathQuestionActivity, ResultActivity::class.java)
+                            intent.putExtra(Mathqs.USER_NAME, mUserName)
+                            intent.putExtra(Mathqs.CORRECT_ANSWERS, mCorrectAnswers)
+                            intent.putExtra(Mathqs.TOTAL_QUESTIONS, mQuestionsList!!.size)
                             startActivity(intent)
                             finish()
 
@@ -156,7 +156,7 @@ class TriviaQuestion : AppCompatActivity(), View.OnClickListener {
         )
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background = ContextCompat.getDrawable(
-            this@TriviaQuestion,
+            this@MathQuestionActivity,
             R.drawable.selected_option_border_bg
         )
     }
@@ -174,7 +174,7 @@ class TriviaQuestion : AppCompatActivity(), View.OnClickListener {
             option.setTextColor(Color.parseColor("#7A8089"))
             option.typeface = Typeface.DEFAULT
             option.background = ContextCompat.getDrawable(
-                this@TriviaQuestion,
+                this@MathQuestionActivity,
                 R.drawable.default_option_border_bg
             )
         }
@@ -187,25 +187,25 @@ class TriviaQuestion : AppCompatActivity(), View.OnClickListener {
 
             1 -> {
                 tv_option_one.background = ContextCompat.getDrawable(
-                    this@TriviaQuestion,
+                    this@MathQuestionActivity,
                     drawableView
                 )
             }
             2 -> {
                 tv_option_two.background = ContextCompat.getDrawable(
-                    this@TriviaQuestion,
+                    this@MathQuestionActivity,
                     drawableView
                 )
             }
             3 -> {
                 tv_option_three.background = ContextCompat.getDrawable(
-                    this@TriviaQuestion,
+                    this@MathQuestionActivity,
                     drawableView
                 )
             }
             4 -> {
                 tv_option_four.background = ContextCompat.getDrawable(
-                    this@TriviaQuestion,
+                    this@MathQuestionActivity,
                     drawableView
                 )
             }
