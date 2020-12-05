@@ -63,7 +63,7 @@
         android:layout_marginTop="7dp"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        tools:text="High Score" />
+        tools:text="Results" />
 
     <ListView
         android:id="@+id/lv_result"

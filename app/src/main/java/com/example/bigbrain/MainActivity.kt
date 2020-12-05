@@ -30,12 +30,16 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra(Trivia.USER_NAME, et_name.text.toString())
                 intent.putExtra(Grammar.USER_NAME, et_name.text.toString())
                 intent.putExtra(Mathqs.USER_NAME, et_name.text.toString())
+                intent.putExtra(History.USER_NAME, et_name.text.toString())
                 startActivity(intent)
                 finish()
             }
             // END
         }
-
-        btn_result
+        btn_result.setOnClickListener {
+            val intent = Intent(this, HighScore::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_back"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="2dp"
+    tools:context=".HighScore">
+
+
+
+    <TextView
+        android:id="@+id/tv_highscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:text="High Score" />
+
+    <ListView
+        android:id="@+id/lv_result"
+        android:layout_width="match_parent"
+        android:layout_height="605dp" />
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="116dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:text="FINISH"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

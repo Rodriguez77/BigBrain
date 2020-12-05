@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BigBrain">
-        <activity android:name=".MathQuestionActivity"></activity>
+        <activity android:name=".HighScore"></activity>
+        <activity android:name=".HistoryQuestionActivity" />
+        <activity android:name=".MathQuestionActivity" />
         <activity android:name=".GrammarQuestionActivity" />
         <activity android:name=".TriviaQuestion" />
         <activity android:name=".LogosQuestionActivity" />

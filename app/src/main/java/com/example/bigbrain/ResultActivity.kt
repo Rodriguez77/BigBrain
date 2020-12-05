@@ -48,7 +48,7 @@ class ResultActivity : AppCompatActivity() {
         scoresHandler.create(pastResult)
         Toast.makeText(
                 applicationContext,
-                "Your Past Result is Saved",
+                "Please Wait.. Your Past Result is Saving",
                 Toast.LENGTH_SHORT
         ).show()
 
