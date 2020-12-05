@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import com.example.bigbrain.handlers.scoresHandler
 import kotlinx.android.synthetic.main.activity_result.*
 import com.example.bigbrain.scores
@@ -17,7 +18,7 @@ class ResultActivity : AppCompatActivity() {
     var mCorrectAnswers: Int = 0
     lateinit var scoresHandler: scoresHandler
     lateinit var scoresListView: ListView
-   //lateinit var scores: Scores
+   lateinit var lscores: scores
     lateinit var show: ArrayList<scores>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +27,7 @@ class ResultActivity : AppCompatActivity() {
 
         scoresListView = findViewById(R.id.lv_result)
         scoresHandler = scoresHandler()
+        show = ArrayList()
         mUserName = intent.getStringExtra(Flags.USER_NAME)
         mUserName = intent.getStringExtra(Logos.USER_NAME)
         mUserName = intent.getStringExtra(Trivia.USER_NAME)
@@ -43,10 +45,22 @@ class ResultActivity : AppCompatActivity() {
 
         tv_score.text = "Your Score is $correctAnswers out of $totalQuestions."
 
+        scoresHandler.create(pastResult)
+        Toast.makeText(
+                applicationContext,
+                "Your Past Result is Saved",
+                Toast.LENGTH_SHORT
+        ).show()
+
+
         btn_finish.setOnClickListener {
             startActivity(Intent(this@ResultActivity, MainActivity::class.java))
+
         }
     }
+
+
+
         override fun onStart() {
             super.onStart()
 
@@ -55,8 +69,8 @@ class ResultActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                    show.clear()
                     snapshot.children.forEach{
-                            it -> val Scores = it.getValue(scores::class.java)
-                       show.add(Scores!!)
+                            it -> val lscores = it.getValue(scores::class.java)
+                       show.add(lscores!!)
                     }
 
                     val adapter = ArrayAdapter<scores>(applicationContext, android.R.layout.simple_list_item_1, show)

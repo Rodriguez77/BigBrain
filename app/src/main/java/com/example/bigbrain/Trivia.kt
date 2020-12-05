@@ -91,10 +91,10 @@ object Trivia {
 
         // 9
         val que9 = Question1(
-            9, "Which country is known as the Land of White Elephant?",
+            9, "What is the national animal of Scotland",
 
-            "Singapore", "Thailand",
-            "Lebanon", "New Zealand", 2
+            "Unicorn", "Horse",
+            "Tiger", "Monkey", 1
         )
 
         questionsList.add(que9)
