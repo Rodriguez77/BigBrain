@@ -35,5 +35,7 @@ class MainActivity : AppCompatActivity() {
             }
             // END
         }
+
+        btn_result
     }
 }
