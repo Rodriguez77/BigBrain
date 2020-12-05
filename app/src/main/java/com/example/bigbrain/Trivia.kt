@@ -81,10 +81,10 @@ object Trivia {
 
         // 8
         val que8 = Question1(
-            8, "Guess what logo is this?",
+            8, "Which is the only male animal that can give birth?",
 
-            "Autodesk", "Argonne",
-            "One Drive", "Google Drive", 4
+            "Seahorses", "Platypuses",
+            "Sloths", "Rhinos", 1
         )
 
         questionsList.add(que8)
