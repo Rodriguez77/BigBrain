@@ -13,13 +13,14 @@ import kotlinx.android.synthetic.main.activity_result.*
 
 class HighScore : AppCompatActivity() {
     var mUserName: String? = null
+    var mCorrectAnswers: Int = 0
     lateinit var scoresHandler: scoresHandler
     lateinit var scoresListView: ListView
+    lateinit var lscores: scores
     lateinit var show: ArrayList<scores>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_high_score)
-
         btn_finish.setOnClickListener {
             startActivity(Intent(this@HighScore, MainActivity::class.java))
             scoresListView = findViewById(R.id.lv_result)
@@ -27,7 +28,7 @@ class HighScore : AppCompatActivity() {
             show = ArrayList()
 
         }
-    }
+        }
         override fun onStart() {
             super.onStart()
 

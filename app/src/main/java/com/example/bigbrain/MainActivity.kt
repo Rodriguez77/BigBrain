@@ -37,9 +37,10 @@ class MainActivity : AppCompatActivity() {
             // END
         }
         btn_result.setOnClickListener {
-            val intent = Intent(this, HighScore::class.java)
+            val intent = Intent(this, ResultActivity::class.java)
             startActivity(intent)
             finish()
+
         }
     }
 }
